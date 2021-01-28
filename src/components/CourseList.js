@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 
 function CourseList (props) {
 
-
     function renderRow(course) {
         return <tr key={course.id}>
             <td><Link to={"/course/" + course.slug}>{course.title}</Link></td>
@@ -15,7 +14,7 @@ function CourseList (props) {
 
     return (
         <>
-            <table>
+            <table className="table">
                 <thead>
                     <tr>
                         <th>Title</th>
