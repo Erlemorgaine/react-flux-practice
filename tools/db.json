@@ -46,8 +46,8 @@
       "id": 7,
       "title": "Clean Code: Writing Code for Humans",
       "slug": "writing-clean-code-humans",
-      "authorId": 1,
-      "category": "Software Practices"
+      "authorId": 2,
+      "category": "Software Practicesssssssssssssssssssssssss"
     },
     {
       "id": 8,
@@ -69,30 +69,6 @@
       "slug": "web-components-shadow-dom",
       "authorId": 1,
       "category": "HTML5"
-    },
-    {
-      "id": 11,
-      "slug": "tt",
-      "title": "tt",
-      "authorId": 2,
-      "category": "la",
-      "createdAt": 1611841366194
-    },
-    {
-      "id": 12,
-      "slug": "test",
-      "title": "test",
-      "authorId": 2,
-      "category": "testest",
-      "createdAt": 1611841545062
-    },
-    {
-      "id": 13,
-      "slug": "toast",
-      "title": "toast",
-      "authorId": 1,
-      "category": "la",
-      "createdAt": 1611841893806
     }
   ],
   "authors": [
