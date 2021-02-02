@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
+import { toast } from "react-toastify";
+import courseStore from "../stores/courseStore";
+import * as courseActions from "../actions/courseActions";
 import { Prompt } from "react-router-dom";
 import CourseForm from "./CourseForm";
-import * as courseApi from "../api/courseApi";
-import { toast } from "react-toastify";
 
 const ManageCoursePage = (props) => {
     const [ course, setCourse ] = useState({
@@ -13,16 +14,26 @@ const ManageCoursePage = (props) => {
         category: ""
     });
 
+    const [courses, setCourses] = useState(courseStore.getCourses())
     const [errors, setErrors] = useState({});
 
     useEffect(() => {
+        courseStore.addChangeListener(onChange);
+
         const slug = props.match.params.slug;
 
-        if (slug) {
-            courseApi.getCourseBySlug(slug).then(_course => setCourse(_course));
+        if (courses.length === 0) {
+            courseActions.loadCourses();
+        } else if (slug) { // Can be an else if since course.length is an dependency, so useEffect will be fired again after course array is filled
+            setCourse(courseStore.getCourseBySlug(slug));
         }
         
-    }, [props.match.params.slug]);
+        return () => courseStore.removeChangeListener(onChange);
+    }, [courses.length, props.match.params.slug]);
+
+    function onChange() {
+        setCourses(courseStore.getCourses());
+    }
 
     function handleCourseChange({target}) {
         setCourse({...course, [target.name]: target.value});
@@ -44,7 +55,7 @@ const ManageCoursePage = (props) => {
         event.preventDefault();
 
         if (formIsValid()) {
-            courseApi.saveCourse(course).then(() => {
+            courseActions.saveCourse(course).then(() => {
                 props.history.push("/courses");
                 toast.success("Course saved");
             });
